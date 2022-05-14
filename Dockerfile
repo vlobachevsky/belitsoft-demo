@@ -10,7 +10,6 @@ RUN apk --update add gcc make g++ zlib-dev pcre-dev openssl-dev && \
 		--with-http_ssl_module && \
 	make && \
 	make install
-RUN cat /etc/passwd	
 
 
 FROM alpine:3.15.4
