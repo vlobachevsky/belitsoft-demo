@@ -3,12 +3,19 @@
 # Building Image
 ```
 export NGINX_VERSION=nginx-1.20.2
-docker build --build-arg NGINX_VERSION=$NGINX_VERSION -t custom-nginx .
+docker build --build-arg NGINX_VERSION=$NGINX_VERSION -t vlobachevsky/nginx-demo .
+docker push vlobachevsky/nginx-demo
 ```
 
 # Running Container
 ```
-docker run -d --name custom-nginx -p 80:80 -p 443:443 custom-nginx
+docker run -d --name nginx-demo -p 80:80 vlobachevsky/nginx-demo
+```
+
+# Deploy on K8s
+```
+kubectl create -f nginx-demo-deployment.yaml
+kubectl create -f nginx-demo-service.yaml
 ```
 
 # Misc Commands
