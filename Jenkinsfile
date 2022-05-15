@@ -25,8 +25,8 @@ pipeline {
 			}
 			post {
 				cleanup {
-					sh "docker stop container nginx-demo"
-					sh "docker rm container nginx-demo"
+					sh "docker container stop nginx-demo"
+					sh "docker container rm nginx-demo"
 				}
 			}
 		}
