@@ -1,0 +1,6 @@
+{
+	"jenkins.pipeline.linter.connector.url": "http://localhost:8080/pipeline-model-converter/validate",
+	"jenkins.pipeline.linter.connector.crumbUrl": "http://localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,%22:%22,//crumb)",
+	"jenkins.pipeline.linter.connector.strictssl": false,
+	"jenkins.pipeline.linter.connector.user": "admin"
+}
