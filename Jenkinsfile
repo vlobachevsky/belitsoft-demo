@@ -23,12 +23,19 @@ pipeline {
 				sleep 10
 				sh "curl http://localhost:80"
 			}
+			post {
+				cleanup {
+					sh "docker stop container nginx-demo"
+					sh "docker rm container nginx-demo"
+				}
+			}
 		}
 		stage('Deploy') {
 			steps {
-				echo 'OK'
+				sh "kubectl create -f k8s/nginx-demo-deployment.yaml"
+				sh "kubectl create -f k8s/nginx-demo-service.yaml"
+				sh "kubectl get all"
 			}
-
 		}
 	}
 
