@@ -19,7 +19,9 @@ pipeline {
 		}
 		stage('Test') {
 			steps {
-				echo 'OK'
+				sh "docker run -d --name nginx-demo -p 80:80 vlobachevsky/nginx-demo"
+				sleep 10
+				sh "curl http://localhost:80"
 			}
 		}
 		stage('Deploy') {
