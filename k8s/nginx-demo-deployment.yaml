@@ -53,14 +53,14 @@ spec:
     metadata:
       labels:
         app: nginx-demo
-    volumes:
-      - name: nginx-conf
-        configMap:
-          name: nginx-conf
-          items:
-            - key: nginx.conf
-              path: nginx.conf
     spec:
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
       containers:
         - name: nginx-demo
           image: vlobachevsky/nginx-demo:latest
