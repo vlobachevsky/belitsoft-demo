@@ -40,7 +40,7 @@ pipeline {
                     sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-deployment.yaml"
                     sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-service.yaml"
                     sh "/usr/local/bin/kubectl rollout restart deployment/nginx-demo-deployment"
-                    sleep 20
+                    sleep 10
                     sh "/usr/local/bin/kubectl get all"
                 }
             }
