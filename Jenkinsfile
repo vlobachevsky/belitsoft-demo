@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				sh "docker run -d --name nginx-demo -p 8081:80 vlobachevsky/nginx-demo"
 				sleep 10
-				sh "curl http://localhost:8081"
+				sh "curl -I http://localhost:8081"
 			}
 			post {
 				cleanup {
@@ -31,11 +31,14 @@ pipeline {
 			}
 		}
 		stage('Deploy') {
-			steps {
-				sh "kubectl create -f k8s/nginx-demo-deployment.yaml"
-				sh "kubectl create -f k8s/nginx-demo-service.yaml"
-				sh "kubectl get all"
-			}
+            steps {
+                withKubeConfig([credentialsId: 'kubernetes-jenkins-token', serverUrl: 'http://localhost:8001']) {
+                    sh "/usr/local/bin/kubectl create -f k8s/nginx-demo-deployment.yaml"
+                    sh "/usr/local/bin/kubectl create -f k8s/nginx-demo-service.yaml"
+                    sleep 20
+                    sh "/usr/local/bin/kubectl get all"
+                }
+            }
 		}
 	}
 
