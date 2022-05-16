@@ -26,6 +26,7 @@ pipeline {
                 sh "docker run -d --name nginx-demo -p 8081:80 -p 8082:443 vlobachevsky/nginx-demo"
                 sleep 10
                 sh "curl -I http://localhost:8081"
+                sh "curl -I https://localhost:8082 --insecure"
             }
             post {
                 cleanup {
