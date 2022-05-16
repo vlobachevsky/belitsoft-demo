@@ -69,7 +69,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: nginx-conf
-              mountPath: /etc/nginx
+              mountPath: /usr/local/nginx/conf/nginx.conf
               readOnly: true
           livenessProbe:
             exec:
