@@ -1,1 +1,1 @@
-echo 'In entrypoint script Test2'
+echo 'In entrypoint script'
