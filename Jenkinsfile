@@ -27,23 +27,23 @@ pipeline {
 				sleep 10
 				sh "curl -I http://localhost:8081"
 			}
-			post {
-				cleanup {
-					sh "docker container stop nginx-demo"
-					sh "docker container rm nginx-demo"
-				}
-			}
+			// post {
+			// 	cleanup {
+			// 		sh "docker container stop nginx-demo"
+			// 		sh "docker container rm nginx-demo"
+			// 	}
+			// }
 		}
-		stage('Deploy') {
-            steps {
-                withKubeConfig([credentialsId: 'kubernetes-jenkins-token', serverUrl: 'http://localhost:8001']) {
-                    sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-deployment.yaml"
-                    sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-service.yaml"
-                    sleep 20
-                    sh "/usr/local/bin/kubectl get all"
-                }
-            }
-		}
+		// stage('Deploy') {
+        //     steps {
+        //         withKubeConfig([credentialsId: 'kubernetes-jenkins-token', serverUrl: 'http://localhost:8001']) {
+        //             sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-deployment.yaml"
+        //             sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-service.yaml"
+        //             sleep 20
+        //             sh "/usr/local/bin/kubectl get all"
+        //         }
+        //     }
+		// }
 	}
 
 	post {
