@@ -33,8 +33,8 @@ pipeline {
 		stage('Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'kubernetes-jenkins-token', serverUrl: 'http://localhost:8001']) {
-                    sh "/usr/local/bin/kubectl create -f k8s/nginx-demo-deployment.yaml"
-                    sh "/usr/local/bin/kubectl create -f k8s/nginx-demo-service.yaml"
+                    sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-deployment.yaml"
+                    sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-service.yaml"
                     sleep 20
                     sh "/usr/local/bin/kubectl get all"
                 }
