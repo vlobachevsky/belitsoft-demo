@@ -25,5 +25,5 @@ COPY ./entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
 
-#CMD ["nginx", "-g", "daemon off;"]
-CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
+CMD ["nginx", "-g", "daemon off;"]
+#CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
