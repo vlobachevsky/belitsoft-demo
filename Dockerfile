@@ -25,5 +25,8 @@ COPY ./config/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
 
+EXPOSE 80
+EXPOSE 443
+
 # CMD ["nginx", "-g", "daemon off;"]
 # CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
