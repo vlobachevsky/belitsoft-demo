@@ -17,7 +17,7 @@ RUN apk --update add pcre openssl && \
 	mkdir -p /usr/local/nginx/ && \
 	adduser -D -s /sbin/nologin nginx && \
 	mkdir -p /usr/local/nginx/ssl/ && \
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout test-cert/ssl/private.key -out test-cert/ssl/public.pem -subj '/CN=.'
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/local/nginx/ssl/private.key -out /usr/local/nginx/ssl/public.pem -subj '/CN=.'
 COPY --from=builder /usr/local/nginx/ /usr/local/nginx/
 RUN sed -iE 's/#user\s\+nobody/user nginx/g' /usr/local/nginx/conf/nginx.conf
 RUN ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
