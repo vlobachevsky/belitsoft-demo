@@ -13,7 +13,7 @@ RUN apk --update add gcc make g++ zlib-dev pcre-dev openssl-dev && \
 
 
 FROM alpine:3.15.4
-RUN apk --update add pcre && \
+RUN apk --update add pcre openssl && \
 	mkdir -p /usr/local/nginx/ && \
 	adduser -D -s /sbin/nologin nginx && \
 	mkdir -p /usr/local/nginx/ssl/ && \
