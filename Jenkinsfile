@@ -1,6 +1,10 @@
 pipeline {
 	agent any
 
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '10'))
+	}
+
 	parameters {
 		string(name: 'NGINX_VERSION', defaultValue: 'nginx-1.20.2', description: 'A nginx source package version to download, e.g. nginx-1.20.2')
 	}
