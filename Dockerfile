@@ -23,7 +23,7 @@ RUN ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
 COPY ./config/nginx.conf /usr/local/nginx/conf/nginx.conf
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-# ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]
 #CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
