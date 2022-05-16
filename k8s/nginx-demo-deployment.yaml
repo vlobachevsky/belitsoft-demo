@@ -17,7 +17,6 @@ spec:
       containers:
         - name: nginx-demo
           image: vlobachevsky/nginx-demo:latest
-          imagePullPolicy: Always
           ports:
             - containerPort: 80
           livenessProbe:
