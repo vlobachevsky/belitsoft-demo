@@ -17,7 +17,7 @@ RUN apk --update add pcre openssl && \
 	mkdir -p /usr/local/nginx/ && \
 	adduser -D -s /sbin/nologin nginx
 COPY --from=builder /usr/local/nginx/ /usr/local/nginx/
-COPY ./conf/nginx.conf /usr/local/nginx/conf/nginx.conf
+COPY ./config/ /usr/local/nginx/conf/
 # RUN sed -iE 's/#user\s\+nobody/user nginx/g' /usr/local/nginx/conf/nginx.conf
 RUN ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
 CMD ["nginx", "-g", "daemon off;"]
