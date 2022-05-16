@@ -1,0 +1,1 @@
+echo 'In entrypoint script'

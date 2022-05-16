@@ -13,11 +13,17 @@ RUN apk --update add gcc make g++ zlib-dev pcre-dev openssl-dev && \
 
 
 FROM alpine:3.15.4
+
 RUN apk --update add pcre openssl && \
 	mkdir -p /usr/local/nginx/ && \
 	adduser -D -s /sbin/nologin nginx
 COPY --from=builder /usr/local/nginx/ /usr/local/nginx/
-COPY ./config/ /usr/local/nginx/conf/
-# RUN sed -iE 's/#user\s\+nobody/user nginx/g' /usr/local/nginx/conf/nginx.conf
 RUN ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/nginx
-CMD ["nginx", "-g", "daemon off;"]
+
+COPY ./config/ /usr/local/nginx/conf/
+COPY ./entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]
+
+#CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
