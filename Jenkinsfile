@@ -49,7 +49,7 @@ pipeline {
         stage('Test Deploy') {
             steps {
                 sh "curl -I http://localhost"
-                sh "curl -I https://localhost"    
+                sh "curl -I https://localhost --insecure"    
             }
         }
     }
