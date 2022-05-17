@@ -1,43 +1,43 @@
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: nginx-conf
-# data:
-#   nginx.conf: |
-#     user nginx;
-#     worker_processes  2;
-#     events {
-#       worker_connections  1024;
-#     }
-#     http {
-#       include       mime.types;
-#       default_type  application/octet-stream;
-#       sendfile        on;
-#       keepalive_timeout  65;
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  nginx.conf: |
+    user nginx;
+    worker_processes  1;
+    events {
+      worker_connections  1024;
+    }
+    http {
+      include       mime.types;
+      default_type  application/octet-stream;
+      sendfile        on;
+      keepalive_timeout  65;
       
-#       server {
-#         listen 80 default_server;
-#         server_name _;
-#         return 301 https://$host$request_uri;
-#       }
+      server {
+        listen 80 default_server;
+        server_name _;
+        return 301 https://$host$request_uri;
+      }
 
-#       server {
-#         listen 443 ssl;
-#         server_name _;
-#         ssl_certificate /etc/ssl/certs/nginx.crt;
-#         ssl_certificate_key /etc/ssl/nginx.pem;       
+      server {
+        listen 443 ssl;
+        server_name _;
+        ssl_certificate /etc/ssl/certs/nginx.crt;
+        ssl_certificate_key /etc/ssl/nginx.pem;       
         
-#         location / {
-#             root   html;
-#             index  index.html index.htm;
-#         }
-#         error_page   500 502 503 504  /50x.html;
-#         location = /50x.html {
-#             root   html;
-#         }
-#       }
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+      }
 
-# ---
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,23 +54,23 @@ spec:
       labels:
         app: nginx-demo
     spec:
-      # volumes:
-      #   - name: nginx-conf
-      #     configMap:
-      #       name: nginx-conf
-      #       items:
-      #         - key: nginx.conf
-      #           path: nginx.conf
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: nginx-conf
+            items:
+              - key: nginx.conf
+                path: nginx.conf
       containers:
         - name: nginx-demo
           image: vlobachevsky/nginx-demo:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-          # volumeMounts:
-          #   - name: nginx-conf
-          #     mountPath: /etc/nginx
-          #     readOnly: true
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx
+              readOnly: true
           livenessProbe:
             exec:
               command:
