@@ -18,7 +18,8 @@ kubectl create -f nginx-demo-deployment.yaml
 kubectl create -f nginx-demo-service.yaml
 ```
 
-# Misc Commands
+# Update Nginx configuration
 ```
 kubectl create configmap nginx-conf --from-file ./config/nginx.conf -o yaml --dry-run=client | kubectl apply -f -
+kubectl rollout restart deployment/nginx-demo-deployment
 ```
