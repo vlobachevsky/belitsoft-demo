@@ -38,6 +38,7 @@ pipeline {
         stage('Deploy') {
            steps {
                 withKubeConfig([credentialsId: 'kubernetes-jenkins-token', serverUrl: "http://localhost:8001"]) {
+                    sh "/usr/local/bin/kubect create configmap nginx-conf --from-file ./config/nginx.conf"
                     sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-deployment.yaml"
                     sh "/usr/local/bin/kubectl apply -f k8s/nginx-demo-service.yaml"
                     sh "/usr/local/bin/kubectl rollout restart deployment/nginx-demo-deployment"

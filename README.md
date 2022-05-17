@@ -20,10 +20,5 @@ kubectl create -f nginx-demo-service.yaml
 
 # Misc Commands
 ```
-wget http://nginx.org/download/nginx-1.20.2.tar.gz
-tar -xf nginx-1.20.2.tar.gz
-cd nginx-1.20.2
-
-./configure --with-http_ssl_module --without-http_rewrite_module
-make
+kubectl create configmap nginx-conf --from-file ./config/nginx.conf -o yaml --dry-run=client | kubectl apply -f -
 ```
