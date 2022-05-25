@@ -14,23 +14,23 @@ spec:
       labels:
         app: nginx-demo
     spec:
-      volumes:
-        - name: nginx-conf
-          configMap:
-            name: nginx-conf
-            items:
-              - key: nginx.conf
-                path: nginx.conf
+      # volumes:
+      #   - name: nginx-conf
+      #     configMap:
+      #       name: nginx-conf
+      #       items:
+      #         - key: nginx.conf
+      #           path: nginx.conf
       containers:
         - name: nginx-demo
           image: vlobachevsky/nginx-demo:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-          volumeMounts:
-            - name: nginx-conf
-              mountPath: /etc/nginx
-              readOnly: true
+          # volumeMounts:
+          #   - name: nginx-conf
+          #     mountPath: /etc/nginx
+          #     readOnly: true
           livenessProbe:
             exec:
               command:

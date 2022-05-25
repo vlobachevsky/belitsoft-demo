@@ -14,8 +14,10 @@ docker run -d --name nginx-demo -p 80:80 vlobachevsky/nginx-demo
 
 # Deploy on K8s
 ```
-kubectl create -f nginx-demo-deployment.yaml
-kubectl create -f nginx-demo-service.yaml
+cd k8s
+kubectl create configmap nginx-conf --from-file ../config/nginx.conf -o yaml --dry-run=client | kubectl apply -f -
+kubectl apply -f nginx-demo-deployment.yaml
+kubectl apply -f nginx-demo-service.yaml
 ```
 
 # Update Nginx configuration
